@@ -1,12 +1,10 @@
 class Player {
-    constructor(id){
+    constructor(id, token){
         this.id = id
         this.wins = 0
-        this.token = 'X'
+        this.token = token
     }
     increaseWins(id){
         this.wins++
     }
 }
-
-module.exports = Player
