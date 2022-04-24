@@ -5,6 +5,10 @@ body {
   padding: 0;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .column-wrapper {
     display: flex;
     flex-direction: row;
@@ -20,12 +24,23 @@ body {
     padding-left: 150px;
 }
 
-.left-wrapper, .right-wrapper{
-    background-color: rgb(174, 17, 227);
+.left-column {
+    border-color: aliceblue;
+    /* background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.earth.com%2Fnews%2Fmoon-dust-toxic-health%2F&psig=AOvVaw3DYEGZrMdFKd0yBRX2f6BY&ust=1650674455355000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCKidvti3pvcCFQAAAAAdAAAAABAD"); */
 }
 
-.left-counter, .right-counter{
-    border: 1px solid red;
+.left-wrapper, .right-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.astronaut, .alien {
+    font-size: 45px;
+    margin-bottom: 0;
+}
+
+.left-counter, .right-counter {
+    font-weight: 900;
 }
 
 
@@ -33,14 +48,14 @@ body {
 .middle-wrapper {
     display: flex;
     flex-direction: column;
-    border: 20px solid red;
     margin-top: 100px;
 }
 
 .turn-display {
     display: flex;
-    border: 20px solid red;
     justify-content: center;
+    font-weight: 900;
+    margin-bottom: 50px;
 }
 
 .game {
@@ -49,11 +64,14 @@ body {
     grid-template-columns: repeat(3, 1fr);
     width: 500px;
     height: 500px;   
-    border: 1px solid rebeccapurple;
-    
 }
 
 .game-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 60px;
     border: 10px solid rgb(11, 162, 124);  
 }
 
@@ -61,7 +79,7 @@ body {
     border-top: none;
 }
 
- .game-cell:nth-child(1),.game-cell:nth-child(4),.game-cell:nth-child(7){
+.game-cell:nth-child(1),.game-cell:nth-child(4),.game-cell:nth-child(7){
     border-left: none;
 }
 
