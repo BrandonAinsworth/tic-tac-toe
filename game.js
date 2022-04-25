@@ -5,6 +5,7 @@ class Game {
         this.alien = new Player(2, "👽")
         this.currentPlayer = this.astronaut
         this.turns = 0
+        this.boardMax = 8;
         this.winConditions = [
             [0, 1, 2],
             [3, 4, 5],
@@ -16,19 +17,22 @@ class Game {
             [2, 4, 6]
         ];
         this.win = false;
+        this.draw = false;
     }
     playerMove(boardIndex) {
-
+        this.turns++
         if ((this.currentPlayer === this.astronaut) && !this.board[boardIndex]) {
             this.currentPlayer.move.push(boardIndex)
             this.board[boardIndex] = 1;
-            this.checkWinner(this.currentPlayer);
+            this.checkWinner(this.currentPlayer)
+            // this.currentPlayer.increaseWins(this.currentPlayer.id)
             this.switchTurn()
             return this.board
         } else if (!this.board[boardIndex]) {
             this.currentPlayer.move.push(boardIndex)
             this.board[boardIndex] = 2;
             this.checkWinner(this.currentPlayer)
+            // this.currentPlayer.increaseWins(this.currentPlayer.id)
             this.switchTurn()
             return this.board
         } else {
@@ -36,47 +40,20 @@ class Game {
         }
 
     }
-    // checkBoard() {
-    //     for (var i = 0; i < this.board.length; i++) {
-    //         return this.board[i]
-    //     }
-    //     // this.checkWinner();
-    // }
 
-//    checkWinner(currentPlayer){
-//        return this.winConditions.some(banana => {
-//            return banana.every(currentPlayer.move => {
-//             return this.board.contains(currentPlayer.move)
-//            })
-//        })
-//    }
     checkWinner(currentPlayer) {
         for (var i = 0; i < this.winConditions.length; i++) {
             if (this.winConditions[i].every(position => {
                     return currentPlayer.move.includes(position)
                 })) {
                 this.win = true
-                this.winnerWinner(currentPlayer)
                 console.log('WinWinWinWin')
                 this.resetGame()
+            } else {
+                this.isDraw()
             }
         }
     }
-
-winnerWinner(currentPlayer){
-    currentPlayer.wins++
-
-}
-
-    // checkWinner() {
-    //     for (var i = 0; this.winConditions.length; i++) {
-    //         if (this.winConditions[i].includes(this.board)){
-    //         this.win = true
-    //         window.alert("You win!")
-    //         this.resetGame()
-    //         }
-    //     }
-    // }
 
     switchTurn() {
         if (this.currentPlayer === this.astronaut) {
@@ -89,12 +66,19 @@ winnerWinner(currentPlayer){
     }
 
     isDraw() {
-        window.alert('A Draw!')
-        this.resetGame();
+        //    if (this.board.every(e => e != ""))
+        if (this.turns === 9) {
+            this.draw = true
+            console.log('A Draw!')
+            this.resetGame();
+
+        }
     }
     resetGame() {
         if (this.win) {
             this.currentPlayer.wins++
+            this.board = ["", "", "", "", "", "", "", "", ""]
+        } else if (this.draw) {
             this.board = ["", "", "", "", "", "", "", "", ""]
         }
     }
