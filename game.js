@@ -1,7 +1,7 @@
 class Game {
     constructor() {
         this.board = ["", "", "", "", "", "", "", ""],
-            this.astronaut = new Player(1, "🧑‍🚀")
+        this.astronaut = new Player(1, "🧑‍🚀")
         this.alien = new Player(2, "👽")
         this.currentPlayer = this.astronaut
         this.turns = 0
@@ -25,14 +25,12 @@ class Game {
             this.currentPlayer.move.push(boardIndex)
             this.board[boardIndex] = 1;
             this.checkWinner(this.currentPlayer)
-            // this.currentPlayer.increaseWins(this.currentPlayer.id)
             this.switchTurn()
             return this.board
         } else if (!this.board[boardIndex]) {
             this.currentPlayer.move.push(boardIndex)
             this.board[boardIndex] = 2;
             this.checkWinner(this.currentPlayer)
-            // this.currentPlayer.increaseWins(this.currentPlayer.id)
             this.switchTurn()
             return this.board
         } else {
