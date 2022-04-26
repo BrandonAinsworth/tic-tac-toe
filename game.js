@@ -5,6 +5,8 @@ class Game {
         this.alien = new Player(2, "👽")
         this.currentPlayer = this.astronaut
         this.turns = 0
+        this.win = false;
+        this.draw = false;
         this.winConditions = [
             [0, 1, 2],
             [3, 4, 5],
@@ -15,25 +17,19 @@ class Game {
             [0, 4, 8],
             [2, 4, 6]
         ];
-        this.win = false;
-        this.draw = false;
-        this.winner;
     }
     playerMove(boardIndex) {
         this.turns++
-        if ((this.currentPlayer === this.astronaut) && !this.board[boardIndex]) {
+        if (this.currentPlayer === this.astronaut) {
             this.currentPlayer.move.push(parseInt(boardIndex))
             this.board[boardIndex] = 1;
             this.checkWinner(this.currentPlayer)
             this.switchTurn()
-        } else if (!this.board[boardIndex]) {
+        } else {
             this.currentPlayer.move.push(parseInt(boardIndex))
             this.board[boardIndex] = 2;
             this.checkWinner(this.currentPlayer)
             this.switchTurn()
-            // return this.board[boardIndex]
-        } else {
-            return "This position is unnaccapetable."
         }
     }
 
@@ -42,14 +38,13 @@ class Game {
             if (this.winConditions[i].every(position => {
                     return currentPlayer.move.includes(position)
                 })) {
-                this.winner = this.currentPlayer
                 this.win = true
-                // this.resetGame()
             } else {
                 this.isDraw()
             }
         }
     }
+
     switchTurn() {
         if (this.win || this.draw) return;
         if (this.currentPlayer === this.astronaut) {
@@ -60,16 +55,16 @@ class Game {
             }
         }
     }
+
     isDraw() {
         if (this.turns === 9 && !this.win) {
             this.draw = true
-            // this.resetGame();
         } else {
             this.draw = false
         }
     }
+
     resetGame() {
-        console.log('reset game')
         if (this.win) {
             this.currentPlayer.wins++
             this.board = []

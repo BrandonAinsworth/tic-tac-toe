@@ -10,13 +10,12 @@ var rightCounter = document.querySelector('.right-counter')
 
 //EVENT LISTENERS
 
-// gameBoard.addEventListener('click',currentGame.playerMove)
 gameBoard.addEventListener('click', insertPlayerMoveOnDOM)
 
 //FUNCTIONS
 function updatePlayerTurnAndConditionText() {
     if (currentGame.draw) {
-    turnDisplay.innerText = "It's a draw!"
+        turnDisplay.innerText = "It's a draw!"
     } else if (!currentGame.win) {
         turnDisplay.innerText = `It's the ${currentGame.currentPlayer.token}'s turn!`
     } else {
@@ -33,16 +32,13 @@ function resetDOMBoard() {
     }
 }
 
-function startNewGame(){
-    console.log('Hello start new game')
+function startNewGame() {
     updatePlayerTurnAndConditionText()
-    gameBoard.addEventListener('click',insertPlayerMoveOnDOM)
+    gameBoard.addEventListener('click', insertPlayerMoveOnDOM)
 }
 
-
-
-function blockMovesAfterWinDraw(){
-gameBoard.removeEventListener('click', insertPlayerMoveOnDOM)
+function blockMovesAfterWinDraw() {
+    gameBoard.removeEventListener('click', insertPlayerMoveOnDOM)
 }
 
 function updatePlayerWins() {
@@ -52,9 +48,9 @@ function updatePlayerWins() {
 
 function gameStateHandler() {
     if (currentGame.win === true || currentGame.draw === true) {
-        console.log("Hello handler")
         currentGame.resetGame()
         updatePlayerWins()
+        blockMovesAfterWinDraw()
         setTimeout(function () {
             resetDOMBoard()
             startNewGame()
@@ -62,13 +58,9 @@ function gameStateHandler() {
     }
 }
 
-// window.onclick = e => {
-//     console.log(e.target.id)
-
 function insertPlayerMoveOnDOM(e) {
     var closest = e.target.closest('.game-cell');
     if (closest.innerText === '') {
-        console.log('closest inner text')
         closest.innerText = currentGame.currentPlayer.token
         currentGame.board.push()[currentGame.playerMove(e.target.id)]
         updatePlayerTurnAndConditionText()
