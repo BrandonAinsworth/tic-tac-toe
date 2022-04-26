@@ -26,20 +26,17 @@ class Game {
             this.board[boardIndex] = 1;
             this.checkWinner(this.currentPlayer)
             this.switchTurn()
-            console.log(this.board[boardIndex])
-            return this.board[boardIndex]
         } else if (!this.board[boardIndex]) {
             this.currentPlayer.move.push(parseInt(boardIndex))
             this.board[boardIndex] = 2;
             this.checkWinner(this.currentPlayer)
             this.switchTurn()
-            console.log(this.board[boardIndex])
-            return this.board[boardIndex]
+            // return this.board[boardIndex]
         } else {
             return "This position is unnaccapetable."
         }
     }
-//CHECKWINNER NEEDS TO CHECK FOR DRAW FIRST!!!!!!!!!
+
     checkWinner(currentPlayer) {
         for (var i = 0; i < this.winConditions.length; i++) {
             if (this.winConditions[i].every(position => {
@@ -47,7 +44,7 @@ class Game {
                 })) {
                 this.winner = this.currentPlayer
                 this.win = true
-                this.resetGame()
+                // this.resetGame()
             } else {
                 this.isDraw()
             }
@@ -64,18 +61,28 @@ class Game {
         }
     }
     isDraw() {
-        if (this.turns === 9) {
+        if (this.turns === 9 && !this.win) {
             this.draw = true
-            console.log('A Draw!')
-            this.resetGame();
+            // this.resetGame();
+        } else {
+            this.draw = false
         }
     }
     resetGame() {
+        console.log('reset game')
         if (this.win) {
             this.currentPlayer.wins++
             this.board = []
+            this.astronaut.move = []
+            this.alien.move = []
+            this.win = false
+            this.turns = 0
         } else if (this.draw) {
             this.board = []
+            this.astronaut.move = []
+            this.alien.move = []
+            this.draw = false;
+            this.turns = 0
         }
     }
 }
