@@ -2,6 +2,7 @@
 
 # Aliens👽 VS. Astronauts🧑‍🚀 Tic-Tac-Toe: Solo Project
 
+<img width="1440" alt="Screen Shot 2022-04-26 at 5 43 15 PM" src="https://user-images.githubusercontent.com/87993138/165410464-a64735cb-0576-43a5-9985-487e9ce85970.png">
 
 ## Introduction 
 
@@ -29,6 +30,7 @@ Are you familiar with tic-tac-toe? Great! You will have no issue playing this sp
 ## Specifications and Rubric
 
 Project spec & rubric can be found [here](https://frontend.turing.edu/projects/module-1/tic-tac-toe-solo.html)
+
 
 
 ## Contributors 
