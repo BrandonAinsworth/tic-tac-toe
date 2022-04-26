@@ -12,49 +12,43 @@ var turnDisplay = document.querySelector('.turn-display')
 gameBoard.addEventListener('click', showPiece)
 
 //FUNCTIONS
-function updatePlayerTurnText(){
-    console.log('Helloo!')
-turnDisplay.innerText = `It's the ${currentGame.currentPlayer.token}'s turn!`
+function updatePlayerTurnAndConditionText() {
+    if (!currentGame.win) {
+        turnDisplay.innerText = `It's the ${currentGame.currentPlayer.token}'s turn!`
+    } else if (currentGame.draw) {
+        turnDisplay.innerText = "It's a draw!"
+    } else {
+        turnDisplay.innerText = `${currentGame.currentPlayer.token} WINS!!!`
+    }
 }
-updatePlayerTurnText()
+updatePlayerTurnAndConditionText()
 
-// window.onclick = e => {
-//     showPiece(e)
-// }
-//    var cellIndex = gameCells.findIndex(e.target)
-//    console.log(cellIndex)
-//    console.log(e.target.index)
+function resetBoard() {
+    //for loop game cells innertext = null or ''
+}
+
+function updatePlayerWins() {
+    //update that div innertext this.wins 
+}
+
+function blockExistingPlacementOnGrid(){
+    //
+}
+
+function gameStateHandler() {
+    if (this.win || this.draw) {
+        updateWins()
+        setTimeout(function () {}, 2000)
+        resetBoard()
+    }
+}
 
 // window.onclick = e => {
 //     console.log(e.target.id)
-        // e.target.id.innerHTML = currentGame.board[0]
-    
-// }
 
-
-// function scanCells(){
-//     for (var i = 0; gameCells.length; i++){
-//         gameCells[i] = currentGame.board
-// }
-
-
-
-
-
-
-
-// function dataModeltoDOMBoard(){
-
-// var A1 = currentGame.board[0]
-
-// for (var i = 0; i < currentGame.board.length; i++)
-//     currentGame.board[i].push()
-//     gameCells.id
-// }
-
-
-function showPiece(e){
+function insertPlayerMoveOnDOM(e) {
     var closest = e.target.closest('.game-cell');
     closest.innerText = currentGame.currentPlayer.token
     currentGame.board.push()[currentGame.playerMove(e.target.id)]
+    updatePlayerTurnAndConditionText()
 };

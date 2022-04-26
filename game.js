@@ -37,24 +37,22 @@ class Game {
         } else {
             return "This position is unnaccapetable."
         }
-
     }
-
+//CHECKWINNER NEEDS TO CHECK FOR DRAW FIRST!!!!!!!!!
     checkWinner(currentPlayer) {
         for (var i = 0; i < this.winConditions.length; i++) {
             if (this.winConditions[i].every(position => {
                     return currentPlayer.move.includes(position)
                 })) {
                 this.win = true
-                console.log('WinWinWinWin')
                 this.resetGame()
             } else {
                 this.isDraw()
             }
         }
     }
-
     switchTurn() {
+        if (this.win) return;
         if (this.currentPlayer === this.astronaut) {
             this.currentPlayer = this.alien
         } else {
@@ -63,14 +61,11 @@ class Game {
             }
         }
     }
-
     isDraw() {
-        //    if (this.board.every(e => e != ""))
         if (this.turns === 9) {
             this.draw = true
             console.log('A Draw!')
             this.resetGame();
-
         }
     }
     resetGame() {
