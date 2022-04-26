@@ -5,11 +5,14 @@ var currentGame = new Game();
 var gameBoard = document.querySelector('.game')
 var gameCells = document.querySelectorAll('.game-cell')
 var turnDisplay = document.querySelector('.turn-display')
+var leftCounter = document.querySelector('.left-counter')
+var rightCounter = document.querySelector('.right-counter')
 
+console.log(gameBoard)
 //EVENT LISTENERS
 
 // gameBoard.addEventListener('click',currentGame.playerMove)
-gameBoard.addEventListener('click', showPiece)
+gameBoard.addEventListener('click', insertPlayerMoveOnDOM)
 
 //FUNCTIONS
 function updatePlayerTurnAndConditionText() {
@@ -22,24 +25,27 @@ function updatePlayerTurnAndConditionText() {
     }
 }
 updatePlayerTurnAndConditionText()
+updatePlayerWins()
 
-function resetBoard() {
-    //for loop game cells innertext = null or ''
-}
+function resetDOMBoard() {
+    // for (var i = 0; i < gameBoard.length; i++){
+    //     gameBoard[i].innerText = '';
+        gameCells.innerText = ''
+        // gameBoard.addEventListener('click',insertPlayerMoveOnDOM)
+    }
 
-function updatePlayerWins() {
-    //update that div innertext this.wins 
-}
 
-function blockExistingPlacementOnGrid(){
-    //
+function updatePlayerWins() {    
+    leftCounter.innerText = `${currentGame.astronaut.wins.toString()} WINS`
+    rightCounter.innerText = `${currentGame.alien.wins.toString()} WINS`
 }
 
 function gameStateHandler() {
-    if (this.win || this.draw) {
-        updateWins()
-        setTimeout(function () {}, 2000)
-        resetBoard()
+    if (currentGame.win === true || currentGame.draw === true) {
+        gameBoard.removeEventListener('click',insertPlayerMoveOnDOM)    
+        updatePlayerWins()
+        // setTimeout(function () {}, 200)
+        resetDOMBoard()
     }
 }
 
@@ -47,8 +53,13 @@ function gameStateHandler() {
 //     console.log(e.target.id)
 
 function insertPlayerMoveOnDOM(e) {
+    // blockExistingPlacementOnGrid()
     var closest = e.target.closest('.game-cell');
+    if (closest.innerText === ''){
     closest.innerText = currentGame.currentPlayer.token
     currentGame.board.push()[currentGame.playerMove(e.target.id)]
+    gameStateHandler()
     updatePlayerTurnAndConditionText()
+    
+    }
 };

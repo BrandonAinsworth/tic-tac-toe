@@ -17,6 +17,7 @@ class Game {
         ];
         this.win = false;
         this.draw = false;
+        this.winner;
     }
     playerMove(boardIndex) {
         this.turns++
@@ -44,6 +45,7 @@ class Game {
             if (this.winConditions[i].every(position => {
                     return currentPlayer.move.includes(position)
                 })) {
+                this.winner = this.currentPlayer
                 this.win = true
                 this.resetGame()
             } else {
@@ -52,7 +54,7 @@ class Game {
         }
     }
     switchTurn() {
-        if (this.win) return;
+        if (this.win || this.draw) return;
         if (this.currentPlayer === this.astronaut) {
             this.currentPlayer = this.alien
         } else {
